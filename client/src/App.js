@@ -1,6 +1,7 @@
 
 import './App.css';
 import { Logo } from './assets/svg/SVGs';
+import DesignQuote from './components/widgets/DesignCanva';
 
 function App() {
   return (
@@ -46,7 +47,7 @@ function App() {
 
       </div> */}
 
-      <div class="gradient leading-relaxed tracking-wide flex flex-col">
+      <div class="bg-gradient-to-br from-green-600 to-cyan-500 leading-relaxed tracking-wide flex flex-col">
         <nav id="header" class="w-full z-30 top-0 text-white py-1 lg:py-6">
           <div
             class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-2 lg:py-6"
@@ -145,11 +146,46 @@ function App() {
             >
           </div>
 
-          <div class="flex items-center w-full mx-auto content-end">
-            <div
-              class="browser-mockup flex flex-1 m-6 md:px-0 md:m-12 bg-white w-1/2 rounded shadow-xl"
-            ></div>
+          <div class="flex my-36">
+            <div class="flex-grow h-16 ...">
+              <DesignQuote title={"Design Quote Image"} />
+
+            </div>
+            <div class="flex-grow-0 h-16 ...">
+              <div className="mx-14 "></div>
+            </div>
+            <div class="flex-grow h-16 ...">
+              <div className="flex items-center p-10 bg-white group hover:bg-green-300 shadow rounded-lg cursor-pointer">
+                <div className="inline-flex flex-shrink-0 items-center justify-center rounded-full mr-6">
+                  <svg className="h-20 w-20" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"><path d="m91.3 119.823-30.179-61.37 5.384-2.648 30.177 61.37a3 3 0 0 1 -1.369 4.016 3 3 0 0 1 -4.013-1.368z" fill="#cdcdcd" /><path d="m36.7 119.823 30.176-61.37-5.376-2.648-30.177 61.37a3 3 0 0 0 1.369 4.016 3 3 0 0 0 4.008-1.368z" fill="#cdcdcd" /><path d="m6.969 41.391h46.724v9.565h-46.724z" fill="#f3d55b" transform="matrix(-.972 .235 -.235 -.972 70.68 83.909)" /><path d="m26.486 28.688h20.906v31.77h-20.906z" fill="#f3ba33" transform="matrix(.235 .972 -.972 .235 71.563 -1.821)" /><circle cx="106.634" cy="27.691" fill="#e8e8e8" r="14.864" /><path d="m55.209.47h29.728v72.155h-29.728z" fill="#f3d55b" transform="matrix(.235 .972 -.972 .235 89.097 -40.16)" /><g fill="#f3ba33"><path d="m64 30.648a1.75 1.75 0 0 1 -.411-3.451l13.441-3.256a1.75 1.75 0 1 1 .825 3.4l-13.443 3.259a1.784 1.784 0 0 1 -.412.048z" /><path d="m84.347 25.72a1.75 1.75 0 0 1 -.411-3.451l3.995-.968a1.75 1.75 0 1 1 .824 3.4l-3.995.968a1.74 1.74 0 0 1 -.413.051z" /><path d="m86.05 22.651h41.166v10.082h-41.166z" transform="matrix(.235 .972 -.972 .235 108.443 -82.464)" /></g><path d="m64 121.5a3 3 0 0 1 -3-3v-61.062h6v61.062a3 3 0 0 1 -3 3z" fill="#e8e8e8" /><circle cx="64" cy="55.375" fill="#f3ba33" r="6" /></svg>
+                </div>
+                <div>
+                  <span className="block text-2xl font-bold group-hover:text-black">Explore Awesome Quotes</span>
+                </div>
+              </div>
+            </div>
           </div>
+
+
+          {/* <div class="">
+            <div className="flex flex-col py-5 space-y-6">
+              <div class="grid grid-flow-col grid-rows-2 grid-cols-3 gap-4">
+                <div className="col-start-1 col-span-3">
+                  <DesignQuote title={"Design Quote Image"} />
+                </div>
+                <div class=" col-span-3">
+                  <div className="flex items-center p-6 bg-white group hover:bg-purple-600 shadow rounded-lg cursor-pointer">
+                    <div className="inline-flex flex-shrink-0 items-center justify-center rounded-full mr-6">
+                      <svg className="h-20 w-20" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"><path d="m91.3 119.823-30.179-61.37 5.384-2.648 30.177 61.37a3 3 0 0 1 -1.369 4.016 3 3 0 0 1 -4.013-1.368z" fill="#cdcdcd" /><path d="m36.7 119.823 30.176-61.37-5.376-2.648-30.177 61.37a3 3 0 0 0 1.369 4.016 3 3 0 0 0 4.008-1.368z" fill="#cdcdcd" /><path d="m6.969 41.391h46.724v9.565h-46.724z" fill="#f3d55b" transform="matrix(-.972 .235 -.235 -.972 70.68 83.909)" /><path d="m26.486 28.688h20.906v31.77h-20.906z" fill="#f3ba33" transform="matrix(.235 .972 -.972 .235 71.563 -1.821)" /><circle cx="106.634" cy="27.691" fill="#e8e8e8" r="14.864" /><path d="m55.209.47h29.728v72.155h-29.728z" fill="#f3d55b" transform="matrix(.235 .972 -.972 .235 89.097 -40.16)" /><g fill="#f3ba33"><path d="m64 30.648a1.75 1.75 0 0 1 -.411-3.451l13.441-3.256a1.75 1.75 0 1 1 .825 3.4l-13.443 3.259a1.784 1.784 0 0 1 -.412.048z" /><path d="m84.347 25.72a1.75 1.75 0 0 1 -.411-3.451l3.995-.968a1.75 1.75 0 1 1 .824 3.4l-3.995.968a1.74 1.74 0 0 1 -.413.051z" /><path d="m86.05 22.651h41.166v10.082h-41.166z" transform="matrix(.235 .972 -.972 .235 108.443 -82.464)" /></g><path d="m64 121.5a3 3 0 0 1 -3-3v-61.062h6v61.062a3 3 0 0 1 -3 3z" fill="#e8e8e8" /><circle cx="64" cy="55.375" fill="#f3ba33" r="6" /></svg>
+                    </div>
+                    <div>
+                      <span className="block text-2xl font-bold group-hover:text-black">Explore Awesome Quotes</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> */}
         </div>
 
         <section class="bg-white border-b py-12 ">
@@ -1062,8 +1098,8 @@ function App() {
             </div>
           </div>
         </footer>
-      </div>
-    </div>
+      </div >
+    </div >
 
   );
 }
