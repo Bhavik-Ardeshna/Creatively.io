@@ -15,23 +15,23 @@ import ResetPassword from './pages/ResetPassword';
 
 function App() {
 
-  // const location = useLocation();
+  const location = useLocation();
 
-  // useEffect(() => {
-  //   AOS.init({
-  //     once: true,
-  //     disable: 'phone',
-  //     duration: 700,
-  //     easing: 'ease-out-cubic',
-  //   });
-  // });
+  useEffect(() => {
+    AOS.init({
+      once: true,
+      disable: 'phone',
+      duration: 700,
+      easing: 'ease-out-cubic',
+    });
+  });
 
-  // useEffect(() => {
-  //   document.querySelector('html').style.scrollBehavior = 'auto'
-  //   window.scroll({ top: 0 })
-  //   document.querySelector('html').style.scrollBehavior = ''
-  //   focusHandling('outline');
-  // }, [location.pathname]); // triggered on route change
+  useEffect(() => {
+    document.querySelector('html').style.scrollBehavior = 'auto'
+    window.scroll({ top: 0 })
+    document.querySelector('html').style.scrollBehavior = ''
+    focusHandling('outline');
+  }, [location.pathname]); // triggered on route change
 
   return (
     <>
