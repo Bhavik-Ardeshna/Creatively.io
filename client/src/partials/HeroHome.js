@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Modal from '../utils/Modal';
 import Image1 from '../images/hero-image.png';
+import { Link } from 'react-router-dom';
 function HeroHome() {
 
   const [videoModalOpen, setVideoModalOpen] = useState(false);
@@ -36,9 +37,11 @@ function HeroHome() {
             <div className="max-w-3xl mx-auto">
               <p className="text-xl text-gray-600 mb-8" data-aos="zoom-y-out" data-aos-delay="150">Our landing page template works on all devices, so you only have to set it up once, and get beautiful results forever.</p>
               <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center" data-aos="zoom-y-out" data-aos-delay="300">
-                <div>
-                  <a className="btn text-white bg-blue-600 hover:bg-blue-700 w-full mb-4 sm:w-auto sm:mb-0" href="#0">Start free trial</a>
-                </div>
+                <Link to="/editor">
+                  <div>
+                    <a className="btn text-white bg-blue-600 hover:bg-blue-700 w-full mb-4 sm:w-auto sm:mb-0" href="#0">Creatively Editor</a>
+                  </div>
+                </Link>
                 <div>
                   <a className="btn text-white bg-gray-900 hover:bg-gray-800 w-full sm:w-auto sm:ml-4" href="#0">Learn more</a>
                 </div>

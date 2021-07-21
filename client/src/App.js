@@ -12,26 +12,27 @@ import Home from './pages/Home';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ResetPassword from './pages/ResetPassword';
+import Editor from './pages/Editor';
 
 function App() {
 
-  // const location = useLocation();
+  const location = useLocation();
 
-  // useEffect(() => {
-  //   AOS.init({
-  //     once: true,
-  //     disable: 'phone',
-  //     duration: 700,
-  //     easing: 'ease-out-cubic',
-  //   });
-  // });
+  useEffect(() => {
+    AOS.init({
+      once: true,
+      disable: 'phone',
+      duration: 700,
+      easing: 'ease-out-cubic',
+    });
+  });
 
-  // useEffect(() => {
-  //   document.querySelector('html').style.scrollBehavior = 'auto'
-  //   window.scroll({ top: 0 })
-  //   document.querySelector('html').style.scrollBehavior = ''
-  //   focusHandling('outline');
-  // }, [location.pathname]); // triggered on route change
+  useEffect(() => {
+    document.querySelector('html').style.scrollBehavior = 'auto'
+    window.scroll({ top: 0 })
+    document.querySelector('html').style.scrollBehavior = ''
+    focusHandling('outline');
+  }, [location.pathname]); // triggered on route change
 
   return (
     <>
@@ -47,6 +48,9 @@ function App() {
         </Route>
         <Route path="/reset-password">
           <ResetPassword />
+        </Route>
+        <Route path="/editor">
+          <Editor />
         </Route>
       </Switch>
     </>
