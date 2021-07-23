@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from "react-router-dom";
 import "./css/other.css";
 import "./css/style.processed.css";
-
 import App from './App.js';
 
 // import * as serviceWorker from './serviceWorker';
