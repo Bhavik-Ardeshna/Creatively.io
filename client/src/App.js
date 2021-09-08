@@ -13,6 +13,9 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ResetPassword from './pages/ResetPassword';
 import Editor from './pages/Editor';
+import Profile from './pages/Profile';
+import AboutUs from './pages/AboutUs';
+import ContactUs from './pages/ContactUs';
 
 function App() {
 
@@ -40,11 +43,20 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
+        <Route path="/about">
+          <AboutUs />
+        </Route>
+        <Route path="/contact">
+          <ContactUs />
+        </Route>
         <Route path="/signin">
           <SignIn />
         </Route>
         <Route path="/signup">
           <SignUp />
+        </Route>
+        <Route path="/profile">
+          <Profile />
         </Route>
         <Route path="/reset-password">
           <ResetPassword />
