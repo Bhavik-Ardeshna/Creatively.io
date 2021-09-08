@@ -1,71 +1,70 @@
-import { React, useState, useRef } from "react";
-import * as htmlToImage from "html-to-image";
-// import FileSaver from 'file-saver';
-import download from "downloadjs";
+import { React} from "react";
+// import * as htmlToImage from "html-to-image";
+// // import FileSaver from 'file-saver';
+// import download from "downloadjs";
 
 const Editor = () => {
-    const canvas = useRef(null);
-    const imgClass = useRef(null);
+    // const canvas = useRef(null);
+    // const imgClass = useRef(null);
 
-    const [text, setText] = useState("");
-    const [fontSize, setFontSize] = useState(1);
-    const [fontSizeClass, setFontSizeClass] = useState(1);
-    const [fontAlign, setFontAlign] = useState("center");
-    const [fontColor, setFontColor] = useState("white");
+    // const [text, setText] = useState("");
+    // const [fontSize, setFontSize] = useState(1);
+    // const [fontSizeClass, setFontSizeClass] = useState(1);
+    // const [fontAlign, setFontAlign] = useState("center");
+    // const [fontColor, setFontColor] = useState("white");
 
-    function handleClick(operation) {
-        var fs = fontSize;
-        if (operation === "plus") {
-            fs += 1;
-        } else {
-            fs -= 1;
-        }
-        var sizeClass = `text-${fs}xl`;
-        setFontSize(fs);
-        setFontSizeClass(sizeClass);
-    }
+    // function handleClick(operation) {
+    //     var fs = fontSize;
+    //     if (operation === "plus") {
+    //         fs += 1;
+    //     } else {
+    //         fs -= 1;
+    //     }
+    //     var sizeClass = `text-${fs}xl`;
+    //     setFontSize(fs);
+    //     setFontSizeClass(sizeClass);
+    // }
 
-    function handleText(e) {
-        setText(e.target.value);
-    }
+    // function handleText(e) {
+    //     setText(e.target.value);
+    // }
 
-    function justifyText(align) {
-        setFontAlign(align);
-    }
+    // function justifyText(align) {
+    //     setFontAlign(align);
+    // }
 
-    function SetColor(color) {
-        setFontColor(color);
-    }
+    // function SetColor(color) {
+    //     setFontColor(color);
+    // }
 
-    function Download(e) {
-        // htmlToImage.toPng(canvas.current)
-        //   .then(function (dataUrl) {
-        //     var img = new Image();
-        //     img.src = dataUrl;
-        //     imgClass.current.appendChild(img)
-        //   })
-        //   .catch(function (error) {
-        //     console.error('oops, something went wrong!', error);
-        //   });
-        htmlToImage.toJpeg(canvas.current).then(function (blob) {
-            download(blob, "my-node.jpeg");
-        });
-    }
+    // function Download(e) {
+    //     // htmlToImage.toPng(canvas.current)
+    //     //   .then(function (dataUrl) {
+    //     //     var img = new Image();
+    //     //     img.src = dataUrl;
+    //     //     imgClass.current.appendChild(img)
+    //     //   })
+    //     //   .catch(function (error) {
+    //     //     console.error('oops, something went wrong!', error);
+    //     //   });
+    //     htmlToImage.toJpeg(canvas.current).then(function (blob) {
+    //         download(blob, "my-node.jpeg");
+    //     });
+    // }
     return (
         <div>
-            <div className="container mx-auto px-4 ">
+            {/* <div className="container mx-auto px-4 ">
                 <div className="mt-2 flex space-x-4">
                     <div className="rounded-md bg-indigo-200 text-white font-semibold flex justify-center py-3 px-6 w-1/3 shadow">
                         <div className="flex flex-col w-full md:py-8 mt-8 md:mt-0">
                             <div className="relative mb-4">
-                                {" "}
+                                
                                 <label
                                     htmlFor="message"
                                     className="leading-7 text-sm text-white"
                                 >
-                                    {" "}
                                     Message{" "}
-                                </label>{" "}
+                                </label>
                                 <textarea
                                     onChange={handleText}
                                     id="message"
@@ -174,7 +173,7 @@ const Editor = () => {
                     </div>{" "}
                 </div>{" "}
                 <div ref={imgClass}></div>{" "}
-            </div>{" "}
+            </div>{" "} */}
         </div>
     );
 };

@@ -5,10 +5,9 @@ import { Link } from 'react-router-dom';
 function HeroHome() {
 
   const [videoModalOpen, setVideoModalOpen] = useState(false);
-
   return (
     <section className="relative">
-
+      
       {/* Illustration behind hero content */}
       <div className="absolute left-1/2 transform -translate-x-1/2 bottom-0 pointer-events-none" aria-hidden="true">
         <svg width="1360" height="578" viewBox="0 0 1360 578" xmlns="http://www.w3.org/2000/svg">
@@ -37,7 +36,7 @@ function HeroHome() {
             <div className="max-w-3xl mx-auto">
               <p className="text-xl text-gray-600 mb-8" data-aos="zoom-y-out" data-aos-delay="150">Our landing page template works on all devices, so you only have to set it up once, and get beautiful results forever.</p>
               <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center" data-aos="zoom-y-out" data-aos-delay="300">
-                <Link to="/editor">
+                <Link to={localStorage.getItem('jwt')!=null ? '/editor' : '/signin'}>
                   <div>
                     <a className="btn text-white bg-blue-600 hover:bg-blue-700 w-full mb-4 sm:w-auto sm:mb-0" href="#0">Creatively Editor</a>
                   </div>

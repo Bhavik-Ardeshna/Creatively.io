@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useHistory } from 'react-router-dom';
 
 import Header from '../partials/Header';
 
 function SignUp() {
 
+  const history = useHistory();
   const [name,setName] = useState('')
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
 
-  const PostSignUpData = ()=>{
+  const PostSignUpData = (e)=>{
+    e.preventDefault()
     fetch('/auth/signup',{
         method: 'POST',
         headers: {
@@ -22,10 +24,9 @@ function SignUp() {
         })
       }).then(response => {
         response.json()
+        history.push("/signin");
       }).then(data => {
         console.log(data)
-      }).catch(error => {
-      console.log(error)
       })
   }
 
@@ -70,7 +71,7 @@ function SignUp() {
                   </div>
                   <div className="flex flex-wrap -mx-3 mt-6">
                     <div className="w-full px-3">
-                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full" onClick={()=>PostSignUpData()} >Sign up</button>
+                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full" onClick={(e)=>PostSignUpData(e)} >Sign up</button>
                     </div>
                   </div>
                   <div className="text-sm text-gray-500 text-center mt-3">
