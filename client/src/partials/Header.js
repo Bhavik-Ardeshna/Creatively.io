@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-
+import React, { useState, useEffect, useContext } from 'react';
+import { Link ,useHistory} from 'react-router-dom';
+import {UserContext} from '../App'
 function Header() {
 
   const [top, setTop] = useState(true);
 
+  const {state,dispatch} = useContext(UserContext);
+  const history = useHistory();
   // detect whether user has scrolled the page down by 10px 
   useEffect(() => {
     const scrollHandler = () => {
@@ -14,6 +16,70 @@ function Header() {
     return () => window.removeEventListener('scroll', scrollHandler);
   }, [top]);
 
+  const LogOut = ()=>{
+    localStorage.setItem("user",null);
+    localStorage.setItem("token",null);
+
+    // dispatch({type:"CLEAR"});
+    history.go(0)
+  }
+
+  const renderNavList = ()=>{
+    if(state){
+
+      return[
+              <li>
+                <Link to="/profile" className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  <span className="pl-2 text-red-500 hover:text-red-800">{state.name}</span>
+                  </Link>
+              </li>,
+              <li>
+                <Link to="/about" className="btn-sm text-black bg-blue-400 hover:bg-blue-500  ml-3">
+                    <span>About Us</span>
+                    <svg className="w-3 h-3 fill-current text-gray-400 flex-shrink-0 ml-2 -mr-1" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z" fillRule="nonzero" />
+                    </svg>
+                </Link>
+              </li>,
+              <li>
+                <Link to="/contact" className="btn-sm text-black bg-blue-400 hover:bg-blue-500 ml-3">
+                    <span>Contact Us</span>
+                    <svg className="w-3 h-3 fill-current text-gray-400 flex-shrink-0 ml-2 -mr-1" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z" fillRule="nonzero" />
+                    </svg>
+                  </Link>
+              </li>,
+              <li>
+                <button type="button" className="btn-sm text-gray-200 bg-gray-900 hover:bg-gray-800 ml-3"
+                onClick={(e)=>LogOut(e)}>
+                  <span>Logout</span>
+                  <svg className="w-3 h-3 fill-current text-gray-400 flex-shrink-0 ml-2 -mr-1" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z" fillRule="nonzero" />
+                  </svg>
+                </button>
+              </li>,
+          ];
+    }
+    else{
+      return[
+          <li>
+              <Link to="/signin" className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out">Sign in</Link>
+          </li>,
+          <li>
+              <Link to="/signup" className="btn-sm text-gray-200 bg-gray-900 hover:bg-gray-800 ml-3">
+                <span>Sign up</span>
+                <svg className="w-3 h-3 fill-current text-gray-400 flex-shrink-0 ml-2 -mr-1" viewBox="0 0 12 12" xmlns="http://  www.w3.org/2000/svg">
+                   <path d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z" fillRule="nonzero" />
+                </svg>
+              </Link>
+          </li>,
+      ];
+    }
+  }
+
   return (
     <header className={`fixed w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out ${!top && 'bg-white blur shadow-lg'}`}>
       <div className="max-w-6xl mx-auto px-5 sm:px-6">
@@ -22,7 +88,7 @@ function Header() {
           {/* Site branding */}
           <div className="flex-shrink-0 mr-4">
             {/* Logo */}
-            <Link to="/" className="block" aria-label="Cruip">
+            <Link to={state ? "/" : "/signin"} className="block" aria-label="Cruip">
 
               <svg className="w-8 h-8" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -40,40 +106,7 @@ function Header() {
           {/* Site navigation */}
           <nav className="flex flex-grow">
             <ul className="flex flex-grow justify-end flex-wrap items-center">
-              <li>
-              <Link to="/profile" className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-                </Link>
-              </li>
-              <li>
-                <Link to="/signin" className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out">Sign in</Link>
-              </li>
-              <li>
-                <Link to="/signup" className="btn-sm text-gray-200 bg-gray-900 hover:bg-gray-800 ml-3">
-                  <span>Sign up</span>
-                  <svg className="w-3 h-3 fill-current text-gray-400 flex-shrink-0 ml-2 -mr-1" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z" fillRule="nonzero" />
-                  </svg>
-                </Link>
-              </li>
-              <li>
-              <Link to="/about" className="btn-sm text-black bg-blue-400 hover:bg-blue-500  ml-3">
-                  <span>About Us</span>
-                  <svg className="w-3 h-3 fill-current text-gray-400 flex-shrink-0 ml-2 -mr-1" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z" fillRule="nonzero" />
-                  </svg>
-                </Link>
-              </li>
-              <li>
-              <Link to="/contact" className="btn-sm text-black bg-blue-400 hover:bg-blue-500 ml-3">
-                  <span>Contact Us</span>
-                  <svg className="w-3 h-3 fill-current text-gray-400 flex-shrink-0 ml-2 -mr-1" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z" fillRule="nonzero" />
-                  </svg>
-                </Link>
-              </li>
+              {renderNavList()}
             </ul>
 
           </nav>

@@ -21,10 +21,7 @@ import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
 
 export const UserContext = createContext();
-const data = {
-  thought: "Today is a wonderful day to have a wonderful day!",
-  author: "J. K. Rowling"
-}
+
 const Routing  = ()=>{
   const history = useHistory();
   const {state,dispatch} = useContext(UserContext);
@@ -32,7 +29,7 @@ const Routing  = ()=>{
     const user = JSON.parse(localStorage.getItem('user'))   
     if(user){
       dispatch({type:"USER",payload:user})
-      console.log(user)
+      // console.log(dispatch.payload)
       history.push('/')
     }else{
       history.push('/signin')
@@ -62,7 +59,7 @@ const Routing  = ()=>{
           <ResetPassword />
         </Route>
         <Route path="/editor">
-          <Editor thought={data.thought} author={data.author} />
+          <Editor  />
         </Route>
       </Switch>
   )
