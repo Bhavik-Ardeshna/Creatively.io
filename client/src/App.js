@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { createContext, useReducer, useEffect, useContext } from 'react';
 import {
   Switch,
   Route,
-  useLocation
+  useLocation,
+  useHistory
 } from 'react-router-dom';
 
+import {reducer,initialState} from './reducers/userReducer';
+ 
 import AOS from 'aos';
 import { focusHandling } from 'cruip-js-toolkit';
 
@@ -17,29 +20,23 @@ import Profile from './pages/Profile';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
 
-function App() {
+export const UserContext = createContext();
 
-  const location = useLocation();
-
+const Routing  = ()=>{
+  const history = useHistory();
+  const {state,dispatch} = useContext(UserContext);
   useEffect(() => {
-    AOS.init({
-      once: true,
-      disable: 'phone',
-      duration: 700,
-      easing: 'ease-out-cubic',
-    });
-  });
-
-  useEffect(() => {
-    document.querySelector('html').style.scrollBehavior = 'auto'
-    window.scroll({ top: 0 })
-    document.querySelector('html').style.scrollBehavior = ''
-    focusHandling('outline');
-  }, [location.pathname]); // triggered on route change
-
+    const user = JSON.parse(localStorage.getItem('user'))   
+    if(user){
+      dispatch({type:"USER",payload:user})
+      console.log(user)
+      history.push('/')
+    }else{
+      history.push('/signin')
+    } 
+  },[]);
   return (
-    <>
-      <Switch>
+    <Switch>
         <Route exact path="/">
           <Home />
         </Route>
@@ -65,7 +62,34 @@ function App() {
           <Editor />
         </Route>
       </Switch>
-    </>
+  )
+}
+
+
+function App() {
+
+  const location = useLocation();
+  const [state,dispatch] = useReducer(reducer,initialState);
+  useEffect(() => {
+    AOS.init({
+      once: true,
+      disable: 'phone',
+      duration: 700,
+      easing: 'ease-out-cubic',
+    });
+  });
+
+  useEffect(() => {
+    document.querySelector('html').style.scrollBehavior = 'auto'
+    window.scroll({ top: 0 })
+    document.querySelector('html').style.scrollBehavior = ''
+    focusHandling('outline');
+  }, [location.pathname]); // triggered on route change
+
+  return (
+    <UserContext.Provider value={{state,dispatch}}>
+      <Routing/>
+    </UserContext.Provider>
   );
 }
 
