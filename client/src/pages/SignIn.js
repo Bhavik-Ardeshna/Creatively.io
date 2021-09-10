@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import { Link,useHistory } from 'react-router-dom';
-
+import {UserContext} from '../App'
 import Header from '../partials/Header';
 
 function SignIn(){
+  const {dispatch,state} = useContext(UserContext)
+
   const history = useHistory();
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
   
   const PostSignInData = async (e)=>{
+    // const {state,dispatch} = useContext(UserContext)
+  
     e.preventDefault()
     const response = await fetch('/auth/signin',{
         method: 'POST',
@@ -23,8 +27,9 @@ function SignIn(){
         })
       })
       const {token,user} = await response.json()
-      localStorage.setItem("jwt",token)
-      localStorage.setItem("user",user)
+      localStorage.setItem("jwt",JSON.stringify(token))
+      localStorage.setItem("user",JSON.stringify(user))
+      dispatch({type:"USER",payload:user})
       history.push("/");
       
   }
