@@ -21,7 +21,10 @@ import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
 
 export const UserContext = createContext();
-
+const data = {
+  thought: "Today is a wonderful day to have a wonderful day!",
+  author: "J. K. Rowling"
+}
 const Routing  = ()=>{
   const history = useHistory();
   const {state,dispatch} = useContext(UserContext);
@@ -59,7 +62,7 @@ const Routing  = ()=>{
           <ResetPassword />
         </Route>
         <Route path="/editor">
-          <Editor />
+          <Editor thought={data.thought} author={data.author} />
         </Route>
       </Switch>
   )
