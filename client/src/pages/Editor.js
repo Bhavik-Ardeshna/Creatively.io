@@ -4,7 +4,7 @@ import ImageGrid from "../utils/ImageGrid";
 import React from 'react'
 import { ChevronRight } from "../utils/SVGs";
 import axios from 'axios';
-
+import Header from '../partials/Header'
 export default function Editor() {
     const [visible, setVisible] = useState(false);
     const canvas = useRef(null);
@@ -148,10 +148,10 @@ export default function Editor() {
     return (
         <>
 
-
+            <Header />
             <div className="h-mega grid grid-cols-3 gap-4">
 
-                <div className="col-span-2 ... canva_pos">
+                <div className="col-span-2 ...  canva_pos">
                     <div className="pl-64">
                         <>
 
@@ -166,7 +166,7 @@ export default function Editor() {
                                         {/* <div className="rounded-md  py-3 px-3 shadow " > */}
                                         <div class="flex flex-wrap  bg-gray-100 py-10 px-10 relative  ">
                                             <div className="frame" ref={canvas}>
-                                                {/* <img
+                                                <img
                                                     src={image}
                                                     className="lg:w-1/2 lg:h-auto object-cover object-center rounded absolute inset-0 fixImage"
                                                 />
@@ -175,20 +175,20 @@ export default function Editor() {
                                                 </div>
                                                 <div class={"relative z-10 w-full text-" + fontAlign2}>
                                                     <h2 className={fontSizeClass2 + ' py-8 ' + 'text-' + fontColor2}>{text2}</h2>
-                                                </div> */}
+                                                </div>
 
 
-                                                <img
+                                                {/* <img
                                                     src={image}
                                                     className="fixImage"
-                                                />
+                                                /> 
 
                                                 <div class={"relative z-10 w-full text-" + fontAlign1}>
                                                     <h2 className={fontSizeClass1 + ' pt-10 ' + 'text-' + fontColor1}>{text1}</h2>
                                                 </div>
                                                 <div class={"relative z-10 w-full text-" + fontAlign2}>
                                                     <h2 className={fontSizeClass2 + '  ' + 'text-' + fontColor2}>{text2}</h2>
-                                                </div>
+                                                </div> */}
 
                                             </div>
                                             {/* </div> */}
@@ -219,7 +219,7 @@ export default function Editor() {
                     `}</style>
                 </div>
                 {/* <div className="bg-white shadow-lg"> */}
-                <div className="flex flex-col row-span-3 bg-white shadow rounded-lg mt-5 mr-5">
+                <div className="flex flex-col row-span-3 bg-white shadow rounded-lg mt-20 mr-5 overflow-auto">
 
                     <>
                         {
@@ -476,7 +476,7 @@ export default function Editor() {
                                         <ChevronRight className="h-8 w-8 mb-3 mt-3 ml-3" />
                                     </div>
                                     {/* <ImageGrid /> */}
-                                    <div className="container ">
+                                    <div className="container">
                                         <div className="relative hidden md:flex text-gray-600 w-1/2 ml-6 mb-3">
                                             <span className="absolute inset-y-0 left-0 flex items-center pl-1">
                                                 <button type="submit" className="p-1 focus:outline-none focus:shadow-outline" onClick={onSearchSubmit}>
