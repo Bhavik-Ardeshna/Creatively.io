@@ -10,9 +10,9 @@ function SignUp() {
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
 
-  const PostSignUpData = (e)=>{
+  const PostSignUpData = async(e)=>{
     e.preventDefault()
-    fetch('/auth/signup',{
+    const response = await fetch('/auth/signup',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -22,12 +22,16 @@ function SignUp() {
           email,
           password
         })
-      }).then(response => {
-        response.json()
-        history.push("/signin");
-      }).then(data => {
-        console.log(data)
       })
+      const res = await response.json()
+      console.log(res)
+      history.push("/signin");
+      // .then(response => {
+      //   response.json()
+        
+      // }).then(data => {
+      //   console.log(data)
+      // })
   }
 
   return (

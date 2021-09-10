@@ -3,14 +3,14 @@ import { Link,useHistory } from 'react-router-dom';
 
 import Header from '../partials/Header';
 
-function SignIn() {
+function SignIn(){
   const history = useHistory();
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
   
-  const PostSignInData = (e)=>{
+  const PostSignInData = async (e)=>{
     e.preventDefault()
-    fetch('/auth/signin',{
+    const response = await fetch('/auth/signin',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -21,14 +21,12 @@ function SignIn() {
           email:email,
           password:password,
         })
-      }).then(response => {
-        response.json()
-      }).then(data => {
-        // localStorage.setItem("jwt",data.token)
-        // localStorage.setItem("user",data)
-        console.log(data)
-        history.push("/");
       })
+      const {token,user} = await response.json()
+      localStorage.setItem("jwt",token)
+      localStorage.setItem("user",user)
+      history.push("/");
+      
   }
 
   return (
