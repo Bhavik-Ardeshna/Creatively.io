@@ -184,14 +184,14 @@ const Editor = (props) => {
                                 </button>
                             </div>
                         </div>
-                        <div className="">
+                        <div className="pt-8 px-5 pb-5">
                             <div
                                 className="rounded-md text-white font-semibold flex items-center justify-center py-3 px-6 w-full shadow">
-                                <div class="flex flex-wrap w-full bg-gray-100 py-32 px-10 relative mb-4 bg-gradient-to-br from-blue-500 to-green-400">
+                                <div class="flex flex-wrap w-full bg-gray-100 py-32 px-10 relative mb-4 bg-gradient-to-br from-blue-500 to-green-400 fixImage" >
                                     <img
                                         alt="gallery"
-                                        class="w-full object-cover h-full object-center block opacity-25 absolute inset-0 p-5"
-                                        src="https://images.pexels.com/photos/2835436/pexels-photo-2835436.jpeg"
+                                        class="w-full object-cover object-center block absolute inset-0 p-5 fixImage"
+                                        src="https://source.unsplash.com/random"
                                     />
                                     <div className="relative z-10 w-full text-">
 
