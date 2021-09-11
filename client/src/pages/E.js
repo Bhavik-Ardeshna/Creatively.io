@@ -55,7 +55,7 @@ const Editor = () => {
     // }
     return (
         <div>
-            {/* <div className="container mx-auto px-4 ">
+            <div className="container mx-auto px-4 ">
                 <div className="mt-2 flex space-x-4">
                     <div className="rounded-md bg-indigo-200 text-white font-semibold flex justify-center py-3 px-6 w-1/3 shadow">
                         <div className="flex flex-col w-full md:py-8 mt-8 md:mt-0">
@@ -175,7 +175,7 @@ const Editor = () => {
                     </div>{" "}
                 </div>{" "}
                 <div ref={imgClass}></div>{" "}
-            </div>{" "} */}
+            </div>{" "}
         </div>
     );
 };
