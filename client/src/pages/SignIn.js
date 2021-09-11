@@ -1,9 +1,39 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
+import React, { useState,useContext } from 'react';
+import { Link,useHistory } from 'react-router-dom';
+import {UserContext} from '../App'
 import Header from '../partials/Header';
 
-function SignIn() {
+function SignIn(){
+  const {dispatch,state} = useContext(UserContext)
+
+  const history = useHistory();
+  const [email,setEmail] = useState('')
+  const [password,setPassword] = useState('')
+  
+  const PostSignInData = async (e)=>{
+    // const {state,dispatch} = useContext(UserContext)
+  
+    e.preventDefault()
+    const response = await fetch('/auth/signin',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          "Access-Control-Allow-Origin": "*",
+          "Accept": "application/json"
+        },
+        body:JSON.stringify({
+          email:email,
+          password:password,
+        })
+      })
+      const {token,user} = await response.json()
+      localStorage.setItem("jwt",JSON.stringify(token))
+      localStorage.setItem("user",JSON.stringify(user))
+      dispatch({type:"USER",payload:user})
+      history.push("/");
+      
+  }
+
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
 
@@ -12,7 +42,6 @@ function SignIn() {
 
       {/*  Page content */}
       <main className="flex-grow">
-
         <section className="bg-gradient-to-b from-gray-100 to-white">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="pt-32 pb-12 md:pt-40 md:pb-20">
@@ -24,20 +53,20 @@ function SignIn() {
 
               {/* Form */}
               <div className="max-w-sm mx-auto">
-                <form>
+                <form >
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
                       <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="email">Email</label>
-                      <input id="email" type="email" className="form-input w-full text-gray-800" placeholder="Enter your email address" required />
+                      <input id="email" type="email" className="form-input w-full text-gray-800" placeholder="Enter your email address" value={email} onChange={(e)=>setEmail(e.target.value)} required />
                     </div>
                   </div>
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
                       <div className="flex justify-between">
-                        <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="password">Password</label>
+                        <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="password" >Password</label>
                         <Link to="reset-password" className="text-sm font-medium text-blue-600 hover:underline">Having trouble signing in?</Link>
                       </div>
-                      <input id="password" type="password" className="form-input w-full text-gray-800" placeholder="Enter your password" required />
+                      <input id="password" type="password" className="form-input w-full text-gray-800" placeholder="Enter your password" value={password} onChange={(e)=>setPassword(e.target.value)}  required />
                     </div>
                   </div>
                   <div className="flex flex-wrap -mx-3 mb-4">
@@ -52,7 +81,7 @@ function SignIn() {
                   </div>
                   <div className="flex flex-wrap -mx-3 mt-6">
                     <div className="w-full px-3">
-                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full">Sign in</button>
+                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full" onClick={(e) =>PostSignInData(e)}>Sign in</button>
                     </div>
                   </div>
                 </form>

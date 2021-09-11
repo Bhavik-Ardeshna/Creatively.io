@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useHistory } from 'react-router-dom';
 
 import Header from '../partials/Header';
 
 function SignUp() {
 
+  const history = useHistory();
   const [name,setName] = useState('')
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
 
-  const PostSignUpData = ()=>{
-    fetch('/auth/signup',{
+  const PostSignUpData = async(e)=>{
+    e.preventDefault()
+    const response = await fetch('/auth/signup',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -20,13 +22,16 @@ function SignUp() {
           email,
           password
         })
-      }).then(response => {
-        response.json()
-      }).then(data => {
-        console.log(data)
-      }).catch(error => {
-      console.log(error)
       })
+      const res = await response.json()
+      console.log(res)
+      history.push("/signin");
+      // .then(response => {
+      //   response.json()
+        
+      // }).then(data => {
+      //   console.log(data)
+      // })
   }
 
   return (
@@ -70,7 +75,7 @@ function SignUp() {
                   </div>
                   <div className="flex flex-wrap -mx-3 mt-6">
                     <div className="w-full px-3">
-                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full" onClick={()=>PostSignUpData()} >Sign up</button>
+                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full" onClick={(e)=>PostSignUpData(e)} >Sign up</button>
                     </div>
                   </div>
                   <div className="text-sm text-gray-500 text-center mt-3">

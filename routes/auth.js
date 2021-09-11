@@ -63,7 +63,13 @@ router.post('/signin',(req,res) => {
                     if(doMatches){
                         // res.json("Signed In");
                         const token = jwt.sign({_id:savedUser.id},JWT_SECRET);
-                        return res.json(token);
+                        const {_id,name,email} = savedUser;
+                        const sendData = {
+                            "token": token,
+                            "user":{_id,name,email}
+                        }
+                        
+                        return res.json(sendData);
                     }
                     else{
                         res.status(422).json("Invalid Data");
