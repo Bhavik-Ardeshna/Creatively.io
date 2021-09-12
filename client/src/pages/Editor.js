@@ -4,7 +4,7 @@ import axios from 'axios';
 import IMG1 from "../images/favicon.png";
 
 import { UserContext } from '../App'
-import { SketchPicker } from 'react-color';
+import { BlockPicker, ChromePicker, CirclePicker, CompactPicker, PhotoshopPicker, SketchPicker, SwatchesPicker, TwitterPicker } from 'react-color';
 import { Link } from 'react-router-dom';
 // import Canvas from '../Components/Canvas';
 // import DataTag from '../Components/DataTag';
@@ -13,17 +13,22 @@ const Editor = (props) => {
     const [toggleS, setToggleS] = useState(true);
     const [toggleC, setToggleC] = useState(false);
     const [toggleT, setToggleT] = useState(false);
+    const [toogleIEdit, setToogleIEdit] = useState(false);
     const [color, setColor] = useState('#fff');
-    const [fontSize, setFontSize] = useState(45);
+    const [bordercolor, setBorderColor] = useState('#fff');
     const [fontFamily, setFontFamily] = useState("Monaco");
+    const [opacity, setOpacity] = useState(1);
     const [image, setImage] = useState('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwyMDc0MjF8MHwxfHNlYXJjaHwyfHxjYXJ8ZW58MHx8fA&ixlib=rb-1.2.1&q=80&w=400');
-    const [search, setSearch] = useState("");
+    const [search, setSearch] = useState([]);
     const [clientID, setClientID] = useState("ZG18UChGubjWF05lQqafihNH4zJVnhfV5LyOJtvuPR0");
     const [searchData, setSearchData] = useState([]);
     const [selectSearchImage, setSelectSearchImage] = useState('');
-
+    const [fontSize, setFontSize] = useState(1);
+    const [fontSizeClass, setFontSizeClass] = useState(1);
     const { state, dispatch } = useContext(UserContext);
     const currUserName = state.name;
+    const [fontAlign, setFontAlign] = useState("center");
+
     const toogleSearch = () => {
         setToggleS(true);
         setToggleT(false);
@@ -34,23 +39,48 @@ const Editor = (props) => {
         setToggleT(true);
         setToggleS(false);
         setToggleC(false);
-
+        setToogleIEdit(false);        
     }
     const toogleColor = () => {
         setToggleC(true);
         setToggleT(false);
         setToggleS(false);
+        setToogleIEdit(false);
 
+    }
+    const toogleImageEdit = () => {
+        setToogleIEdit(true);
+        setToggleC(false);
+        setToggleT(false);
+        setToggleS(false);
+
+    }
+    function justifyText(align) {
+        setFontAlign(align);
+    }
+
+    function handleClick(operation) {
+        var fs = fontSize;
+        if (operation === "plus") {
+            fs += 1;
+        } else {
+            fs -= 1;
+        }
+        var sizeClass = `text-${fs}xl`;
+        setFontSize(fs);
+        setFontSizeClass(sizeClass);
     }
     const handleChange = (event) => {
         setFontSize(event.target.value);
-        console.log(fontSize)
     };
     const handleFontFamilyChange = (event) => {
         setFontFamily(event.target.value);
-        console.log(fontFamily)
     };
-
+    const handleOpacityChange = (event) => {
+        const opa =  event.target.value / 100;
+        setOpacity(opa);
+        // console.log(opa);
+    };
     const onSearch = (e) => {
         setSearch(e.target.value);
     };
@@ -83,7 +113,11 @@ const Editor = (props) => {
                                 <li>
                                     <a href="#" onClick={toogleColor}><i class="fa fa-paint-brush px-2" aria-hidden="true"></i></a>
                                 </li>
-
+                                <li>
+                                <a href="#" onClick={toogleImageEdit}>
+                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAADBUlEQVRoge3ZP4xUVRgF8PsIroKBlYSCRBPWhIYGLWy1gTWBSgtCR0JDoYmlNhoDjbhW2oClJQ2xsyZIZBM10bUg/AmsaKI26mYJLK78KN4dvDO+N/P+zBummJNM5uXNd893zn33fvfeNyHMMMMMM0w1sIDPcQebusdmzHUOC23Fv461CYguwxoWh2nMhoh/MYTwQwhhR6teaI+1EMKBLMtWa7WSD5sebuMg5rrR2Jd3DoewmuQ/24ToTkJwsAOto/IvJvnr9X4kSCds5z1fkH8uyb9ZFjdsDngclGWlcV2iioYtk5MTAp7DEm5hI35/jPkukj3GmPh2YqWkXP6I/1W7Vho6MPBJifgelqbdwE8J5VvYjreTeyvTbmA9odwe7z2b3FtvomGSk/h2cn0imjiR3Ls11mwdPIGlIeMfzoxVQwcGdsirTRGmvwpFznmcwU3cj98fYWdTDbOV+EmjEwPYjwv4I34uYH9DuuXQX60qi2g0B/Aq/i6YqGt4rSbXe2g2fJsYkB961gvE93AXh2rqeAYf4rp8A3gDp7FtrAZwBPeSZr/iJbwcr3u4hyMVOedxuaQzvhFX9NYG8EbsnR5WsS/5fZ/+I+IG3qwg/sqQpwmnWxvAMTxIwm9ib0HcQvythwc41kI83GhlAMf1Hz2v4vkh8S/EmB42cbyheLjf2ABO4t8kbAV7Sgn/a7dH/9Z6Q3yBVVM8XGtkAO/gYRLyPXaPEp+03x3b/CMOowbi4YPaBvDuAMkydlUVn/DswuEW4i/j6VoG5AtLiktKNmI1jDQR/+3IThs0gFMDJBcVbIGnQnwkT6vLpwMkXxm1ElYTv1xT/BVVX8Hg5xKSLw0be9MgPiY5V0ByHk9NvfiYaMH4/hv4BVvl7zvL9jbjE5+YWFS8Na6LzyLf0YmJT0zsxVn5ZqzpX0y9ev/FRMWPE9iC3yqKr1YqJwm80oX4SR7qD1eI+S6EsJhl2Z9di6kNo6vP11M15geBvwpE/y6f2Ee1XF86h/wgfjc+iffjnGg9hB8BIj1wIuax31cAAAAASUVORK5CYII=" />
+                                </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -120,29 +154,145 @@ const Editor = (props) => {
                             {
                                 toggleC && (
 
-                                    <div className="container mx-16 px-16 ">
-                                        <h4 className="text-white">Colour</h4>
-                                        {/* <SketchPicker color={color} onChangeComplete={updateColor => setColor(updateColor.hex)} /> */}
+                                    <div className="container pl-16 pt-5">
+                                        <SwatchesPicker height="600px" width="340px" color={color} onChangeComplete={updateColor => setColor(updateColor.hex)} />
                                     </div>
                                 )
                             }
                             {
                                 toggleT && (
                                     <>
-                                        <div className="container mx-16 px-16 ">
+                                        <div className="container px-16 ">
 
                                             <div class="pt-5">
-                                                <h4 className="text-white">Font size</h4>
+                                                <h4 className="text-white">
+                                                    <div className="flex flex-row">
+                                                        <button
+                                                            onClick={() => handleClick("minus")}
+                                                            className="text-white bg-indigo-500 border-0 py-2 px-2 mr-2 focus:outline-none hover:bg-indigo-600 rounded text-lg w-full"
+                                                        >
+                                                            
+                                                            -
+                                                        </button>
+                                                        <input
+                                                            type="text"
+                                                            className="text-black text-center rounded w-full"
+                                                            readOnly
+                                                            value={fontSize}
+                                                        />
+                                                        <button
+                                                            onClick={() => handleClick("plus")}
+                                                            className="text-white bg-indigo-500 border-0 py-2 px-2 ml-2 focus:outline-none hover:bg-indigo-600 rounded text-lg w-full"
+                                                        >
+                                                            +
+                                                        </button>
+                                                    </div>
+                                                </h4>
                                             </div>
                                         </div>
-                                        <div className="container mx-16 px-16 ">
+                                        <div className="container px-16 ">
+
+                                            <div class="pt-5">
+                                                <h4 className="text-white">
+                                                    <div className="flex space-x-2 py-2">
+                                                        <button
+                                                            onClick={() => justifyText("left")}
+                                                            className="text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded text-lg w-full"
+                                                        >
+                                                            
+                                                            Left
+                                                        </button>
+                                                        <button
+                                                            onClick={() => justifyText("center")}
+                                                            className="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg w-full"
+                                                        >
+                                                            
+                                                            Center
+                                                        </button>
+                                                        <button
+                                                            onClick={() => justifyText("right")}
+                                                            className="text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded text-lg w-full"
+                                                        >
+                                                            
+                                                            Right
+                                                        </button>
+                                                    </div>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                        <div className="container px-16 ">
 
                                             <div class="pt-5">
 
-                                                <h4 className="text-white">Font family</h4>
+                                                <h4 className="text-white">
+                                                <strong>
+                                                    <select  onChange={handleFontFamilyChange} class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-5 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+
+                                                        <option aria-label="None" value="" >Font Family</option>
+                                                        <option value={"Lato"}>Lato</option>
+                                                        <option value={"Candara"}>Candara</option>
+                                                        <option value={"Geneva"}>Geneva</option>
+                                                        <option value={"Optima"}>Optima</option>
+                                                        <option value={"Times New Roman"}>Times New Roman</option>
+                                                        <option value={"Cambria"}>Cambria</option>
+                                                        <option value={"Georgia"}>Georgia</option>
+                                                        <option value={"Monaco"}>Monaco</option>
+                                                        <option value={"Comic Sans MS"}>Comic Sans MS</option>
+                                                        <option value={"Impact"}>Impact</option>
+                                                        <option value={"Andale Mono"}>Andale Mono</option>
+                                                        <option value={"Courier New"}>Courier New</option>
+                                                    </select>
+                                                </strong>
+                                                </h4>
                                             </div>
                                         </div >
                                     </>
+                                )
+                            }
+                             {
+                                toogleIEdit && (
+                                    <>
+                                        <div className="container px-16 ">
+
+                                                <div class="pt-5">
+                                                    <h4 className="text-2xl BGC" style={{color:bordercolor}}>
+                                                        <b>Border Colour</b>
+                                                    </h4>
+                                                    <BlockPicker width="340px" color={bordercolor} onChangeComplete={updateColor => setBorderColor(updateColor.hex)} />
+                                                </div>
+                                                
+                                        </div>
+                                        
+                                        <div className="container px-16 ">
+
+                                                <div class="pt-5">
+
+                                                    <h4 className="text-white">
+                                                    <strong>
+                                                        <select  onChange={handleOpacityChange} class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-5 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+
+                                                            <option aria-label="None" value="" >Opacity</option>
+                                                            <option value={0}>0</option>
+                                                            <option value={5}>5</option>
+                                                            <option value={10}>10</option>
+                                                            <option value={20}>25</option>
+                                                            <option value={25}>25</option>
+                                                            <option value={30}>30</option>
+                                                            <option value={40}>40</option>
+                                                            <option value={50}>50</option>
+                                                            <option value={60}>60</option>
+                                                            <option value={70}>70</option>
+                                                            <option value={75}>75</option>
+                                                            <option value={80}>80</option>
+                                                            <option value={90}>90</option>
+                                                            <option value={95}>95</option>
+                                                            <option value={100}>100</option>
+                                                        </select>
+                                                    </strong>
+                                                    </h4>
+                                                </div>
+                                        </div >
+                                      </>  
                                 )
                             }
 
@@ -185,18 +335,19 @@ const Editor = (props) => {
                             </div>
                         </div>
                         <div className="pt-8 px-5 pb-5">
-                            <div
-                                className="rounded-md text-white font-semibold flex items-center justify-center py-3 px-6 w-full shadow">
-                                <div class="flex flex-wrap w-full bg-gray-100 py-32 px-10 relative mb-4 bg-gradient-to-br from-blue-500 to-green-400 fixImage" >
+                            <div className="rounded-md text-white font-semibold flex items-center justify-center py-3 px-6 w-full shadow">
+                                <div class="flex flex-wrap w-full  py-32 px-10 relative mb-4 fixImage" style={{backgroundColor:bordercolor}}>
                                     <img
                                         alt="gallery"
-                                        class="w-full object-cover object-center block absolute inset-0 p-5 fixImage"
-                                        src="https://source.unsplash.com/random"
+                                        className="w-full object-cover object-center block absolute inset-0 p-5 fixImage "
+                                        src={image}
+                                        style={{opacity:opacity}}
                                     />
                                     <div className="relative z-10 w-full text-">
 
                                     </div>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>
