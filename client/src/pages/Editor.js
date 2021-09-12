@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 const Editor = (props) => {
     const [toggleS, setToggleS] = useState(true);
     const [toggleC, setToggleC] = useState(false);
+    const [toggleCon, setToggleCon] = useState(false);
     const [toggleT, setToggleT] = useState(false);
     const [toogleIEdit, setToogleIEdit] = useState(false);
     const [color, setColor] = useState('#fff');
@@ -34,27 +35,35 @@ const Editor = (props) => {
         setToggleT(false);
         setToggleC(false);
         setToogleIEdit(false);
-
+        setToggleCon(false);
     }
     const toogleText = () => {
         setToggleT(true);
         setToggleS(false);
         setToggleC(false);
-        setToogleIEdit(false);        
+        setToogleIEdit(false);   
+        setToggleCon(false);
     }
     const toogleColor = () => {
         setToggleC(true);
         setToggleT(false);
         setToggleS(false);
         setToogleIEdit(false);
-
+        setToggleCon(false);
     }
     const toogleImageEdit = () => {
         setToogleIEdit(true);
         setToggleC(false);
         setToggleT(false);
         setToggleS(false);
-
+        setToggleCon(false);
+    }
+    const toogleContent = () => {
+        setToggleCon(true);
+        setToogleIEdit(false);
+        setToggleC(false);
+        setToggleT(false);
+        setToggleS(false);
     }
     function justifyText(align) {
         setFontAlign(align);
@@ -107,6 +116,12 @@ const Editor = (props) => {
                             <ul className="sidebar-nav">
                                 <li>
                                     <a onClick={toogleSearch} href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
+                                </li>
+                                <li>
+                                    <a onClick={toogleContent} href="#">
+                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAABEElEQVRoge2ZzXECMQyF5QxDUUljNJBAyoAucuECpbC08XEAJzuOFzzOgpXlfUf/SE+za72DzIQQzwUwBz6BI/7pgCUwzxWyaiyuho9cId1l8/URf8BfAN4uWrvcJgANdFWR6n1pKWZMVIg3bhYCbDPdYleTbMxYKaGXBDOzEELoHxhqAOm5Eu4RK96dlV6MF1Ix1zrdkMAxY0Um80aKv4jXXyxS8kX2mbWvynxjxsojZ3eCCvGGnL1125Wze0fOXplPzp4iZ/fO8xQiZ88gZ78SKzKZNyJnr8wnZ0+Rs3tnkoUczc5jrUZaiulp/B699dvvxswWZrb/R29+/WuF83h6yc9Q1DMH4J3ceFoIMW1OssmQRzFLS6cAAAAASUVORK5CYII="/>
+
+                                    </a>
                                 </li>
                                 <li>
                                     <a href="#" onClick={toogleText}><i class="fa fa-font px-2" aria-hidden="true"></i></a>
