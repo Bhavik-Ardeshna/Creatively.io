@@ -33,6 +33,7 @@ const Editor = (props) => {
         setToggleS(true);
         setToggleT(false);
         setToggleC(false);
+        setToogleIEdit(false);
 
     }
     const toogleText = () => {
