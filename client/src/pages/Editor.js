@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext ,useRef} from 'react';
 import '../Editor.css';
 import axios from 'axios';
 import IMG1 from "../images/favicon.png";
@@ -6,6 +6,11 @@ import IMG1 from "../images/favicon.png";
 import { UserContext } from '../App'
 import { BlockPicker, ChromePicker, CirclePicker, CompactPicker, PhotoshopPicker, SketchPicker, SwatchesPicker, TwitterPicker } from 'react-color';
 import { Link } from 'react-router-dom';
+
+
+import * as htmlToImage from "html-to-image";
+import download from "downloadjs";
+
 // import Canvas from '../Components/Canvas';
 // import DataTag from '../Components/DataTag';
 
@@ -31,6 +36,23 @@ const Editor = (props) => {
     const { state, dispatch } = useContext(UserContext);
     const currUserName = state.name;
     const [fontAlign, setFontAlign] = useState("center");
+
+    const canvas = useRef(null);
+
+    function Download(e) {
+        // htmlToImage.toPng(canvas.current)
+        //   .then(function (dataUrl) {
+        //     var img = new Image();
+        //     img.src = dataUrl;
+        //     imgClass.current.appendChild(img)
+        //   })
+        //   .catch(function (error) {
+        //     console.error('oops, something went wrong!', error);
+        //   });
+        htmlToImage.toJpeg(canvas.current).then(function (blob) {
+            download(blob, "my-node.jpeg");
+        });
+    }
 
     const toogleSearch = () => {
         setToggleS(true);
@@ -404,7 +426,7 @@ const Editor = (props) => {
 
                                     <span className="pl-2 text-xl text-red-500 hover:text-red-800">{currUserName}</span>
                                 </Link>
-                                <button className="btn-sm text-black bg-blue-500 hover:bg-blue-600  ml-3">
+                                <button onClick={(e)=>Download(e)} className="btn-sm text-black bg-blue-500 hover:bg-blue-600  ml-3">
                                     <span>Download</span>
                                     <svg className="w-3 h-3 fill-current text-black flex-shrink-0 ml-2 -mr-1" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z" fillRule="nonzero" />
@@ -419,8 +441,9 @@ const Editor = (props) => {
                             </div>
                         </div>
                         <div className="pt-8 px-5 pb-5">
-                            <div className="rounded-md text-white font-semibold flex items-center justify-center py-3 px-6 w-full shadow">
+                            <div className="rounded-md text-white font-semibold flex items-center justify-center py-3 px-6 w-full shadow"  ref={canvas}>
                                 <div class="flex flex-wrap w-full  py-32 px-10 relative mb-4 fixImage" style={{backgroundColor:bordercolor}}>
+                                {/* <div className="frame"> */}
                                     <img
                                         alt="gallery"
                                         className="w-full object-cover object-center block absolute inset-0 p-5 fixImage "
@@ -435,9 +458,8 @@ const Editor = (props) => {
                                         <h2 className='py-8' style={{fontSize:fontSize,color:color,fontFamily:fontFamily}}>{textA}</h2>
                                     </div>
 
-
+                                {/* </div> */}
                                 </div>
-                                
                             </div>
                         </div>
                     </div>
