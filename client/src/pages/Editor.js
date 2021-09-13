@@ -10,6 +10,8 @@ import { Link } from 'react-router-dom';
 // import DataTag from '../Components/DataTag';
 
 const Editor = (props) => {
+    const [textT, setTextT] = useState('')
+    const [textA, setTextA] = useState('')
     const [toggleS, setToggleS] = useState(true);
     const [toggleC, setToggleC] = useState(false);
     const [toggleCon, setToggleCon] = useState(false);
@@ -19,12 +21,12 @@ const Editor = (props) => {
     const [bordercolor, setBorderColor] = useState('#fff');
     const [fontFamily, setFontFamily] = useState("Monaco");
     const [opacity, setOpacity] = useState(1);
-    const [image, setImage] = useState('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwyMDc0MjF8MHwxfHNlYXJjaHwyfHxjYXJ8ZW58MHx8fA&ixlib=rb-1.2.1&q=80&w=400');
+    const [image, setImage] = useState('https://images.unsplash.com/photo-1578070181910-f1e514afdd08?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDc0MjF8MHwxfHNlYXJjaHwyfHxibHVlfGVufDB8fHx8MTYzMTUxMDM3Mg&ixlib=rb-1.2.1&q=80&w=400');
     const [search, setSearch] = useState([]);
     const [clientID, setClientID] = useState("ZG18UChGubjWF05lQqafihNH4zJVnhfV5LyOJtvuPR0");
     const [searchData, setSearchData] = useState([]);
     const [selectSearchImage, setSelectSearchImage] = useState('');
-    const [fontSize, setFontSize] = useState(1);
+    const [fontSize, setFontSize] = useState(14);
     const [fontSizeClass, setFontSizeClass] = useState(1);
     const { state, dispatch } = useContext(UserContext);
     const currUserName = state.name;
@@ -65,6 +67,13 @@ const Editor = (props) => {
         setToggleT(false);
         setToggleS(false);
     }
+    function handleTextT(e) {
+        setTextT(e.target.value)
+    }
+
+    function handleTextA(e) {
+        setTextA(e.target.value)
+    }
     function justifyText(align) {
         setFontAlign(align);
     }
@@ -73,8 +82,12 @@ const Editor = (props) => {
         var fs = fontSize;
         if (operation === "plus") {
             fs += 1;
+            fs = fs%60;
         } else {
             fs -= 1;
+            if(fs<0){
+                fs=1;
+            }
         }
         var sizeClass = `text-${fs}xl`;
         setFontSize(fs);
@@ -245,23 +258,78 @@ const Editor = (props) => {
                                                     <select  onChange={handleFontFamilyChange} class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-5 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
 
                                                         <option aria-label="None" value="" >Font Family</option>
-                                                        <option value={"Lato"}>Lato</option>
-                                                        <option value={"Candara"}>Candara</option>
-                                                        <option value={"Geneva"}>Geneva</option>
-                                                        <option value={"Optima"}>Optima</option>
-                                                        <option value={"Times New Roman"}>Times New Roman</option>
-                                                        <option value={"Cambria"}>Cambria</option>
-                                                        <option value={"Georgia"}>Georgia</option>
-                                                        <option value={"Monaco"}>Monaco</option>
-                                                        <option value={"Comic Sans MS"}>Comic Sans MS</option>
-                                                        <option value={"Impact"}>Impact</option>
-                                                        <option value={"Andale Mono"}>Andale Mono</option>
-                                                        <option value={"Courier New"}>Courier New</option>
+
+                                                        <option style={{fontFamily:"Allison"}} value={"Allison"}>Allison</option>
+
+                                                        <option style={{fontFamily:"Bungee Shade"}} value={"Bungee Shade"}>Bungee Shade</option>
+
+                                                        <option style={{fontFamily:"Cardo"}} value={"Cardo"}>Cardo</option>
+                                                        
+                                                        <option style={{fontFamily:"Caveat"}} value={"Caveat"}>Caveat</option>
+
+                                                        <option style={{fontFamily:"Eater"}} value={"Eater"}>Eater</option>
+
+                                                        <option style={{fontFamily:"Faster One"}} value={"Faster One"}>Faster One</option>
+
+                                                        <option style={{fontFamily:"Frijole"}} value={"Frijole"}>Frijole</option>
+
+                                                        <option style={{fontFamily:"Jura"}} value={"Jura"}>Jura</option>
+
+                                                        <option style={{fontFamily:"Lemon"}} value={"Lemon"}>Lemon</option>
+
+                                                        <option style={{fontFamily:"Merienda One"}} value={"Merienda One"}>Merienda One</option>
+
+                                                        <option style={{fontFamily:"Notable"}} value={"Notable"}>Notable</option>
+
+                                                        <option style={{fontFamily:"Open Sans"}} value={"Open Sans"}>Open Sans</option>
+
+                                                        <option style={{fontFamily:"Roboto"}} value={"Roboto"}>Roboto</option>
+
+                                                        <option style={{fontFamily:"Roboto Mono"}} value={"Roboto Mono"}>Roboto Mono</option>
+                                                        <option style={{fontFamily:"Rye"}} value={"Rye"}>Rye</option>
+
+                                                        <option style={{fontFamily:"Sacramento"}} value={"Sacramento"}>Sacramento</option>
+
+                                                        <option style={{fontFamily:"Satisfy"}} value={"Satisfy"}>Satisfy</option>
+
+                                                        <option style={{fontFamily:"Syncopate"}} value={"Syncopate"}>Syncopate</option>
+                                                        <option style={{fontFamily:"Ubuntu"}} value={"Ubuntu"}>Ubuntu</option>
+
+                                                        <option style={{fontFamily:"Walter Turncoat"}} value={"Walter Turncoat"}>Walter Turncoat</option>
+
+
+
+
                                                     </select>
                                                 </strong>
                                                 </h4>
                                             </div>
                                         </div >
+                                    </>
+                                )
+                            }
+                             {
+                                toggleCon && (
+                                    <>
+                                        <div className="container px-16 ml-5 ">
+
+                                            <div class="">
+                                                <div className="flex flex-col  p-3 bg-gray-800 group  shadow mt-10 cursor-pointer" >
+                                                        <div>
+                                                            <span className="block text-white text-1xl font-bold mb-3">Thought</span>
+                                                        </div>
+                                                        <textarea onChange={handleTextT} name="message" className="w-max bg-black text-white group-hover:text-white hover:bg-violet-500 rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"/>
+
+                                                        
+                                                </div>
+                                                <div className="flex flex-col  p-3 bg-gray-800 group  shadow mt-10 cursor-pointer" >
+                                                        <div>
+                                                            <span className="block text-white text-1xl font-bold  mb-3">Author</span>
+                                                        </div>
+                                                        <textarea onChange={handleTextA} name="message" className="w-max bg-black text-white group-hover:text-white hover:bg-violet-500 rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"/>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </>
                                 )
                             }
@@ -359,9 +427,15 @@ const Editor = (props) => {
                                         src={image}
                                         style={{opacity:opacity}}
                                     />
-                                    <div className="relative z-10 w-full text-">
-
+                                   
+                                   <div class={"relative z-10 w-full text-" + fontAlign}>
+                                        <h2 className='pt-12' style={{fontSize:fontSize,color:color,fontFamily:fontFamily}}>{textT}</h2>
                                     </div>
+                                    <div class={"relative z-10 w-full text-" + fontAlign}>
+                                        <h2 className='py-8' style={{fontSize:fontSize,color:color,fontFamily:fontFamily}}>{textA}</h2>
+                                    </div>
+
+
                                 </div>
                                 
                             </div>
