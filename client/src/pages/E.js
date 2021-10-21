@@ -1,7 +1,7 @@
 import { React} from "react";
-// import * as htmlToImage from "html-to-image";
-// // import FileSaver from 'file-saver';
-// import download from "downloadjs";
+import * as htmlToImage from "html-to-image";
+// import FileSaver from 'file-saver';
+import download from "downloadjs";
 
 const Editor = () => {
 
@@ -39,20 +39,20 @@ const Editor = () => {
     //     setFontColor(color);
     // }
 
-    // function Download(e) {
-    //     // htmlToImage.toPng(canvas.current)
-    //     //   .then(function (dataUrl) {
-    //     //     var img = new Image();
-    //     //     img.src = dataUrl;
-    //     //     imgClass.current.appendChild(img)
-    //     //   })
-    //     //   .catch(function (error) {
-    //     //     console.error('oops, something went wrong!', error);
-    //     //   });
-    //     htmlToImage.toJpeg(canvas.current).then(function (blob) {
-    //         download(blob, "my-node.jpeg");
-    //     });
-    // }
+    function Download(e) {
+        // htmlToImage.toPng(canvas.current)
+        //   .then(function (dataUrl) {
+        //     var img = new Image();
+        //     img.src = dataUrl;
+        //     imgClass.current.appendChild(img)
+        //   })
+        //   .catch(function (error) {
+        //     console.error('oops, something went wrong!', error);
+        //   });
+        htmlToImage.toJpeg(canvas.current).then(function (blob) {
+            download(blob, "my-node.jpeg");
+        });
+    }
     return (
         <div>
             <div className="container mx-auto px-4 ">
