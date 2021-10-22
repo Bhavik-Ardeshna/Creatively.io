@@ -1,0 +1,79 @@
+body{
+    margin: 0;
+    background-image: url('https://wallpapercave.com/wp/wp6439989.jpg');
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container{
+    color: white;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.card{
+    background-color: #302d2d;
+    width: 300px;
+    height: 500px;
+    border-radius: 20px;
+    text-align: center;
+    margin: 5px;
+}
+
+.ham{
+    float: left;
+    padding: 15px 10px 10px 10px;
+}
+
+.float-right{
+    float: right;
+    padding: 15px 10px 10px 10px;
+}
+
+.pic{
+    width: 10em;
+    border-radius: 50%;
+    margin: 50px 50px 15px 50px;
+    box-shadow: 0px 0px 80px 2px rgba(0 0 0 / 1);
+}
+
+.title{
+    font-size: 28px;
+}
+
+.designation{
+    color: #9b9ba5;
+}
+
+.desc{
+    color: rgb(234, 247, 234);
+    padding: 15px 25px 15px 25px;
+}
+
+.line{
+    border: 1px solid rgb(80, 79, 79);
+}
+
+.btn-more{
+    background-image: linear-gradient(to right, #00042a, #00124d, #001772, #001997, #0012bc);    border: none;
+    width: 110px;
+    border-radius: 150px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.btn-more:hover{
+    background-image: linear-gradient(to right, #0c22e6, #0736d3, #061d79, #07165e, #07116d);    
+    border: none;
+}
+
+.footer{
+    padding: 13px;
+}
