@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/aboutus/aboutus.css';
+import '../aboutus.css';
 function AboutUs(props) {
     return (
         <div>
