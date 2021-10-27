@@ -51,6 +51,7 @@ const Routing  = ()=>{
         <Route path="/profile">
           <Profile />
         </Route>
+       
         <Route path="/reset-password">
           <ResetPassword />
         </Route>
