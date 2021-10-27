@@ -18,7 +18,6 @@ import ResetPassword from './pages/ResetPassword';
 import Editor from './pages/Editor';
 import Profile from './pages/Profile';
 import AboutUs from './pages/AboutUs';
-import ContactUs from './pages/ContactUs';
 
 export const UserContext = createContext();
 
@@ -43,9 +42,6 @@ const Routing  = ()=>{
         <Route path="/about">
           <AboutUs />
         </Route>
-        <Route path="/contact">
-          <ContactUs />
-        </Route>
         <Route path="/signin">
           <SignIn />
         </Route>
@@ -55,6 +51,7 @@ const Routing  = ()=>{
         <Route path="/profile">
           <Profile />
         </Route>
+       
         <Route path="/reset-password">
           <ResetPassword />
         </Route>
