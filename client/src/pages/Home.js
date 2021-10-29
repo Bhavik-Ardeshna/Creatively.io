@@ -2,7 +2,7 @@ import React from 'react';
 
 import Header from '../partials/Header';
 import HeroHome from '../partials/HeroHome';
-import FeaturesHome from '../partials/Features';
+//import FeaturesHome from '../partials/Features';
 import FeaturesBlocks from '../partials/FeaturesBlocks';
 import Footer from '../partials/Footer';
 
@@ -18,7 +18,7 @@ function Home() {
 
         {/*  Page sections */}
         <HeroHome />
-        <FeaturesHome />
+        {/* <FeaturesHome /> */}
         <FeaturesBlocks />
 
       </main>
