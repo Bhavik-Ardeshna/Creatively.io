@@ -13,7 +13,7 @@ function FeaturesBlocks() {
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-            <h2 className="h2 mb-4">How Simple works</h2>
+            <h2 className="h2 mb-4">How Creatively works</h2>
           </div>
 
           {/* Items */}

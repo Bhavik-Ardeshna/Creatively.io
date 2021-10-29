@@ -50,7 +50,7 @@ const Editor = (props) => {
         //     console.error('oops, something went wrong!', error);
         //   });
         htmlToImage.toJpeg(canvas.current).then(function (blob) {
-            download(blob, "my-node.jpeg");
+            download(blob, "Edit-Creatively.jpeg");
         });
     }
 
@@ -432,12 +432,12 @@ const Editor = (props) => {
                                         <path d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z" fillRule="nonzero" />
                                     </svg>
                                 </button>
-                                <button className="btn-sm text-black bg-blue-500 hover:bg-blue-600  ml-3">
+                                {/* <button className="btn-sm text-black bg-blue-500 hover:bg-blue-600  ml-3">
                                     <span>Publish</span>
                                     <svg className="w-3 h-3 fill-current text-black flex-shrink-0 ml-2 -mr-1" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z" fillRule="nonzero" />
                                     </svg>
-                                </button>
+                                </button> */}
                             </div>
                         </div>
                         <div className="pt-8 px-5 pb-5">

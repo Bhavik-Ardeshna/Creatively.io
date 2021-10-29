@@ -1,5 +1,4 @@
 import React from 'react';
-import '../aboutus.css';
 import Header from '../partials/Header';
 function AboutUs(props) {
     return (
@@ -33,7 +32,7 @@ function AboutUs(props) {
             <img class="w-64" src="https://images01.nicepage.com/c461c07a441a5d220e8feb1a/8cc47b39e719570b996d9879/dsds.jpg" alt="" />
             <div class="mt-4 text-green-600 text-center">
               <h1 class="text-xl font-bold">Happy Customers</h1>
-              <p class="mt-4 text-gray-600">Customer can download Template they have created using our editor.</p>
+              <p class="mt-4 text-gray-600">Download Template with all formats.</p>
               <button class="mt-8 mb-4 py-2 px-20 rounded-full bg-blue-600 text-white tracking-widest hover:bg-green-500 transition duration-200">MORE</button>
             </div>
           </div>
